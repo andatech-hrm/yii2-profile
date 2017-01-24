@@ -5,11 +5,14 @@ use dmstr\widgets\Menu;
 use andahrm\person\models\Person;
 use andahrm\person\models\PersonSearch;
 use andahrm\setting\models\Helper;
+
+use andahrm\person\PersonApi;
 ?>
 <?php
 $user = Yii::$app->user->identity;
 $profile = $user->profile;
-$person = Person::findOne($user->id);
+// $person = Person::findOne($user->id);
+$person = PersonApi::instance($user->id);
 $module = $this->context->module->id;
 ?>
 <?php $this->beginContent('@app/views/layouts/main.php'); ?>
@@ -28,32 +31,28 @@ $module = $this->context->module->id;
                 <!-- end of image cropping -->
                 <div id="crop-avatar">
                     <!-- Current avatar -->
-                    <img class="img-responsive avatar-view" src="<?= $profile->resultInfo->avatar; ?>" alt="Avatar" title="Change the avatar">
+                    <img class="img-responsive avatar-view" src="<?= $person->getPhotoLast(); ?>" alt="Avatar" title="Change the avatar">
                     <!-- Loading state -->
                     <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
                 </div>
                 <!-- end of image cropping -->
 
             </div>
-            <h3><?= $profile->fullname; ?></h3>
+            <h3><?= $person->getFullname(); ?></h3>
 
             <ul class="list-unstyled user_data">
-                <li><i class="fa fa-map-marker user-profile-icon"></i>
-                    <?= $person->detail->addressContact->number; ?>
-                    <?= $person->detail->addressContact->sub_road; ?>
-                    <?= $person->detail->addressContact->road; ?>
-                    <?= $person->detail->addressContact->tambol->name; ?>
-                    <?= $person->detail->addressContact->amphur->name; ?>
-                    <?= $person->detail->addressContact->province->name; ?>
+                <li>
+                    <i class="fa fa-map-marker user-profile-icon"></i>
+                    <?= $person->getAddress(); ?>
                 </li>
 
                 <li>
                     <i class="fa fa-briefcase user-profile-icon"></i>
-                    <?= $person->position->title; ?>
+                    <?=$person->getPosition(); ?>
                 </li>
                 <li>
                     <i class="fa fa-briefcase user-profile-icon"></i>
-                    <?= $person->position->section->title; ?>
+                    <?=$person->getSection(); ?>
                 </li>
             </ul>
 

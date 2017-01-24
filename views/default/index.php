@@ -1,57 +1,109 @@
 <?php
 use kartik\detail\DetailView;
 use andahrm\person\models\Title;
+use andahrm\person\models\Religion;
 use yii\helpers\ArrayHelper;
+use kartik\widgets\Select2;
+use kartik\widgets\DatePicker;
 use andahrm\setting\models\WidgetSettings;
+?>
+<?php
+$detailViewConfig = [
+    'formClass' => '\yii\bootstrap\ActiveForm',
+    'buttons1' => '{update}',
+    'vAlign' => DetailView::ALIGN_TOP,
+    'panel'=>[
+        'heading'=>'View # ' . $models['person']->fullname,
+        'type'=>DetailView::TYPE_INFO,
+    ],
+];
+
 ?>
 <div class="profile-default-index">
     <?php
-    echo DetailView::widget([
-        'model'=>$model,
-        'vAlign' => DetailView::ALIGN_TOP,
+        $mkey = 'person';
+    echo DetailView::widget(array_replace_recursive($detailViewConfig, [
+        'id' => 'detail-view-'.$mkey,
+        'model'=>$models[$mkey],
         'panel'=>[
-            'heading'=>'Post # ' . $model->fullname,
-            'type'=>DetailView::TYPE_INFO,
+            'heading'=> $models['person']->fullname,
         ],
-        
-        'attributes'=>[
-            [
-                'attribute'=>'user_id',
-                'format'=>'raw',
-                'value'=>'<kbd>'.$model->user_id.'</kbd>',
-                'displayOnly'=>true
-            ],[
-                'attribute' => 'fullname',
-                'value' => $model->getFullname('th'),
-                'updateMarkup' => function($form, $widget) {
-                $model = $widget->model;
-                return '<div class="row">'.$form->field($model, 'title_id', ['options' => ['class' => 'form-group col-sm-2']])->dropDownList(ArrayHelper::map(Title::find()->all(), 'id', 'name')) . ' ' . 
-                    $form->field($model, 'firstname_th', ['options' => ['class' => 'form-group col-sm-5']]) . ' ' .
-                    $form->field($model, 'lastname_th', ['options' => ['class' => 'form-group col-sm-5']]) . '</div>';
-                }
-            ],[
-                'attribute' => 'fullname',
-                'value' => $model->getFullname('en'),
-                'updateMarkup' => function($form, $widget) {
-                $model = $widget->model;
-                return '<div class="row">'.$form->field($model, 'title_id', ['options' => ['class' => 'form-group col-sm-2']])->dropDownList(ArrayHelper::map(Title::find()->all(), 'id', 'name')) . ' ' . 
-                    $form->field($model, 'firstname_en', ['options' => ['class' => 'form-group col-sm-5']]) . ' ' .
-                    $form->field($model, 'lastname_en', ['options' => ['class' => 'form-group col-sm-5']]) . '</div>';
-                }
-            ],[
-                'attribute' => 'gender',
-                'type' => DetailView::INPUT_RADIO_LIST,
-                'items' => $model->getGenders(),
-            ],[
-                'attribute' => 'tel',
-            ],[
-                'attribute' => 'phone',
-            ],[
-                'attribute' => 'birthday',
-                'type'=>DetailView::INPUT_DATE,
-                'widgetOptions' => WidgetSettings::DatePicker()
-            ]
+        'attributes'=> $this->context->detailViewAttributes('_detail-view-person', ['model' => $models[$mkey]]),
+    ]));
+    ?>
+    
+    <?php
+    $mkey = 'detail';
+    echo DetailView::widget(array_replace_recursive($detailViewConfig, [
+        'id' => 'detail-view-'.$mkey,
+        'model'=>$models[$mkey],
+        'panel'=>[
+            'heading'=> 'Detail # ' . $models['person']->fullname,
         ],
-    ]);
+        'attributes'=> $this->context->detailViewAttributes('_detail-view-detail', ['model' => $models[$mkey]]),
+    ]));
+    ?>
+    
+    <?php
+    $mkey = 'address-contact';
+    echo DetailView::widget(array_replace_recursive($detailViewConfig, [
+        'id' => 'detail-view-'.$mkey,
+        'model'=>$models[$mkey],
+        'panel'=>[
+            'heading'=> 'Address Contact # ' . $models['person']->fullname,
+        ],
+        'attributes'=> $this->context->detailViewAttributes('_detail-view-address', ['model' => $models[$mkey], 'header' => 'Address Contact']),
+    ]));
+    ?>
+    
+    <?php
+    $mkey = 'address-register';
+    echo DetailView::widget(array_replace_recursive($detailViewConfig, [
+        'id' => 'detail-view-'.$mkey,
+        'model'=>$models[$mkey],
+        'panel'=>[
+            'heading'=> 'Address Register # ' . $models['person']->fullname,
+        ],
+        'attributes'=> $this->context->detailViewAttributes('_detail-view-address', ['model' => $models[$mkey], 'header' => 'Address Contact']),
+    ]));
+    ?>
+    
+    <?php
+    $mkey = 'address-birth-place';
+    echo DetailView::widget(array_replace_recursive($detailViewConfig, [
+        'id' => 'detail-view-'.$mkey,
+        'model'=>$models[$mkey],
+        'panel'=>[
+            'heading'=> 'Address Birth Place # ' . $models['person']->fullname,
+        ],
+        'attributes'=> $this->context->detailViewAttributes('_detail-view-address', ['model' => $models[$mkey], 'header' => 'Address Contact']),
+    ]));
+    ?>
+    
+    <?php
+    $mkey = 'people-father';
+    echo DetailView::widget(array_replace_recursive($detailViewConfig, [
+        'id' => 'detail-view-'.$mkey,
+        'model'=>$models[$mkey],
+        'panel'=>[
+            'heading'=> 'Father # ' . $models['person']->fullname,
+        ],
+        'attributes'=> $this->context->detailViewAttributes('_detail-view-people', ['model' => $models[$mkey], 'header' => 'Father']),
+    ]));
+    ?>
+    
+    <?php
+    $mkey = 'people-mother';
+    echo DetailView::widget(array_replace_recursive($detailViewConfig, [
+        'id' => 'detail-view-'.$mkey,
+        'model'=>$models[$mkey],
+        'panel'=>[
+            'heading'=> 'Mother # ' . $models['person']->fullname,
+        ],
+        'attributes'=> $this->context->detailViewAttributes('_detail-view-people', ['model' => $models[$mkey], 'header' => 'Mother']),
+    ]));
     ?>
 </div>
+
+<?php $this->render('_address-js'); ?>
+
