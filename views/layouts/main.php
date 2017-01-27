@@ -77,6 +77,7 @@ $module = $this->context->module->id;
             <?php
             $request = Yii::$app->request;
             $menuItems = [];
+            /*
                 $menuItems = [
                     [
                         'label' => '<i class="fa fa-history"></i> ' . Yii::t('andahrm/person', 'Default'),
@@ -99,6 +100,27 @@ $module = $this->context->module->id;
                         'url' => Helper::urlParams("/{$module}/child"),
                     ], 
                 ];
+                */
+                $menuItems[] =  [
+                        'label' => '<i class="fa fa-history"></i> ' . Yii::t('andahrm/person', 'Profile'),
+                        'url' => Helper::urlParams("/{$module}/default"),
+                    ];             
+                    
+                $menuItems[] =  [
+                        'label' => '<i class="fa fa-info-circle"></i>  ' . Yii::t('andahrm/person', 'Position'),
+                        'url' => Helper::urlParams("/{$module}/position"),
+                    ];          
+                    
+                $menuItems[] =  [
+                        'label' => '<i class="fa fa-camera"></i>  ' . Yii::t('andahrm/person', 'Development'),
+                        'url' => Helper::urlParams("/{$module}/development"),
+                    ];       
+                    
+                $menuItems[] =  [
+                        'label' => '<i class="fa fa-camera"></i>  ' . Yii::t('andahrm/person', 'Prestige'),
+                        'url' => Helper::urlParams("/{$module}/prestige"),
+                    ];    
+                    
             echo Menu::widget([
                 'options' => ['class' => 'nav nav-tabs bar_tabs'],
                 'encodeLabels' => false,
