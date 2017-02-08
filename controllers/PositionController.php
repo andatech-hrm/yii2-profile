@@ -13,8 +13,8 @@ class PositionController extends \yii\web\Controller
     {
         $searchModel = new PersonPositionSalarySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-      $dataProvider->query->where(['user_id'=>Yii::$app->user->id]);
-        //$dataProvider->sort->defaultOrder = ['edoc.updated_at'=>SORT_ASC];
+        $dataProvider->query->where(['user_id'=>Yii::$app->user->id]);
+        $dataProvider->sort->defaultOrder = ['adjust_date'=> SORT_ASC];
 
         return $this->render('index', [
             'searchModel' => $searchModel,

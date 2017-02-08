@@ -102,23 +102,27 @@ $module = $this->context->module->id;
                 ];
                 */
                 $menuItems[] =  [
-                        'label' => '<i class="fa fa-history"></i> ' . Yii::t('andahrm/person', 'Profile'),
+                        'label' => Yii::t('andahrm/person', 'Profile'),
                         'url' => Helper::urlParams("/{$module}/default"),
+                        'icon' => 'fa fa-history'
                     ];             
                     
                 $menuItems[] =  [
-                        'label' => '<i class="fa fa-info-circle"></i>  ' . Yii::t('andahrm/person', 'Position'),
+                        'label' => Yii::t('andahrm/person', 'Position'),
                         'url' => Helper::urlParams("/{$module}/position"),
+                        'icon' => 'fa fa-info-circle'
                     ];          
                     
                 $menuItems[] =  [
-                        'label' => '<i class="fa fa-camera"></i>  ' . Yii::t('andahrm/person', 'Development'),
+                        'label' =>  Yii::t('andahrm/person', 'Development'),
                         'url' => Helper::urlParams("/{$module}/development"),
+                        'icon' => 'fa fa-camera'
                     ];       
                     
                 $menuItems[] =  [
-                        'label' => '<i class="fa fa-camera"></i>  ' . Yii::t('andahrm/person', 'Prestige'),
+                        'label' => Yii::t('andahrm/person', 'Prestige'),
                         'url' => Helper::urlParams("/{$module}/prestige"),
+                        'icon' => 'fa fa-camera'
                     ];    
                     
             echo Menu::widget([

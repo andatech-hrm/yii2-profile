@@ -9,6 +9,7 @@ use kartik\export\ExportMenu;
 use andahrm\edoc\models\Edoc;
 use andahrm\person\models\Person;
 use andahrm\structure\models\Position;
+use andahrm\positionSalary\models\PersonPositionSalary;
 /* @var $this yii\web\View */
 /* @var $searchModel andahrm\positionSalary\models\PersonPositionSalarySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -52,6 +53,62 @@ $gridColumns = [
     $columns['position_id'],   
     $columns['edoc_id'], 
     //['class' => '\kartik\grid\ActionColumn',]
+];
+
+$columns = [
+    'created_at' => 'created_at:datetime',
+    'created_by' => 'created_by',
+    'updated_at' => 'updated_at',
+    'updated_by' => 'updated_by',
+    'status' => [
+            'attribute'=>'status',
+            'filter' => PersonPositionSalary::getItemStatus(),
+            'value' => 'statusLabel',
+      //'group'=>true,
+        ],
+  'edoc_id' => [
+        'attribute'=>'edoc_id',
+        'filter' => Edoc::getList(),
+        'format' => 'html',
+        'value' => 'edoc.codeTitle',
+  //'group'=>true,
+    ],
+  'user_id'=> [
+        'attribute'=>'user_id',
+        'filter' => Person::getList(),
+        'format'=>'html',
+        'value' => function($model){
+            return $model->user->getInfoMedia(['view','edoc_id'=>$model->edoc_id]);
+        },
+        'contentOptions' => ['width' => '200']
+
+    ],
+  'fullname'=> [
+        'attribute'=>'user_id',
+        'filter' => Person::getList(),
+        'value' => 'user.fullname'
+    ],
+  'position_id'=> [
+        'attribute'=>'position_id',
+        'filter' => Position::getList(),
+        'value' => 'position.code'
+    ],
+  'adjust_date'=>'adjust_date:date',
+  'title'=>'title',
+  'salary'=>'salary:decimal',
+  'step'=>'step',
+];
+
+$gridColumns = [
+   ['class' => '\kartik\grid\SerialColumn'],
+   $columns['adjust_date'],
+    //$columns['user_id'], 
+    $columns['position_id'],   
+    $columns['title'],
+    $columns['status'],
+    $columns['salary'],
+    $columns['step'],
+    $columns['edoc_id'],   
 ];
 
 $fullExportMenu = ExportMenu::widget([

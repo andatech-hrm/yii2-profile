@@ -1,6 +1,6 @@
 <?php
 
-namespace andahrm\development\models;
+namespace andahrm\profile\models;
 
 use Yii;
 use yii\base\Model;
@@ -10,7 +10,7 @@ use andahrm\development\models\DevelopmentPerson;
 /**
  * DevelopmentPersonSearch represents the model behind the search form about `andahrm\development\models\DevelopmentPerson`.
  */
-class SelfDevelopment extends \andahrm\development\models\DevelopmentPersonSearch {
+class SelfDevelopmentSearch extends \andahrm\development\models\DevelopmentPersonSearch {
 
     public $rangeDate;
 
@@ -46,7 +46,7 @@ class SelfDevelopment extends \andahrm\development\models\DevelopmentPersonSearc
 
         $query->joinWith('devProject');
 
-
+        $query->where(['development_person.user_id'=>Yii::$app->user->id]);
 
 
         $dataProvider = new ActiveDataProvider([
