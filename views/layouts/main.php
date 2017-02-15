@@ -25,7 +25,7 @@ $module = $this->context->module->id;
     <div class="x_content">
 
         <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-
+            <div id="veiw_sidebar" data-spy="affix" data-offset-top="200">
             <div class="profile_img">
 
                 <!-- end of image cropping -->
@@ -57,6 +57,18 @@ $module = $this->context->module->id;
             </ul>
 
             <!-- <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a> -->
+            </div>
+<?php
+$js[] = <<< JS
+$('#veiw_sidebar').on('affix.bs.affix', function(){
+    var pl = $(this).closest('.profile_left');
+    $(this).css({
+        width: pl.width() + 'px',
+        top: '10px'
+    });
+});
+JS;
+?>
 
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12">
@@ -141,4 +153,7 @@ $module = $this->context->module->id;
     </div>
 </div>
 
+<?php $this->registerJs(implode("\n", $js)); ?>
+
 <?php $this->endContent(); ?>
+

@@ -48,7 +48,8 @@ class DefaultController extends Controller
     {
         $id = Yii::$app->user->id;
         $models['person'] = $this->findModel($id);
-//         $models['user'] = $models['person']->user;
+        $models['user'] = $models['person']->user;
+        $models['photos'] = $models['person']->photos;
         $models['detail'] = ($models['person']->detail !== null ) ? $models['person']->detail : new Detail(['user_id' => $id]);
         $models['address-contact'] = ($models['person']->addressContact !== null ) ? $models['person']->addressContact : new AddressContact(['user_id' => $id]);
         $models['address-birth-place'] = ($models['person']->addressBirthPlace !== null ) ? $models['person']->addressBirthPlace : new AddressBirthPlace(['user_id' => $id]);
