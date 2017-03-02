@@ -8,7 +8,7 @@ use andahrm\setting\widgets\XPanel;
     <div class="col-sm-6 animated flipInY">
         <?php
         $mkey = 'person';
-        XPanel::begin(['header' => 'Basic',]);
+        XPanel::begin(['header' => '<i class="fa fa-info-circle"></i> ' . Yii::t('andahrm/person', 'Information'),]);
 
         $fields = [
             'citizen_id' => $models[$mkey]->citizen_id,
@@ -18,7 +18,7 @@ use andahrm\setting\widgets\XPanel;
             'gender' => $models[$mkey]->getGenderText(),
             'tel' => $models[$mkey]->tel,
             'phone' => $models[$mkey]->phone,
-            'birthday' => $models[$mkey]->birthday,
+            'birthday' => Yii::$app->formatter->asDate($models[$mkey]->birthday),
         ];
         ?>
         <table class="table detail-view">
@@ -38,7 +38,7 @@ use andahrm\setting\widgets\XPanel;
     <div class="col-sm-6 set-height-as-left animated flipInY">
         <?php
         $mkey = 'detail';
-        XPanel::begin(['header' => 'Detail',]);
+        XPanel::begin(['header' => '<i class="fa fa-info-circle"></i> ' . Yii::t('andahrm/person', 'Information'),]);
         
         $fields = [
             'nationality_id' => $models[$mkey]->nationality->title,
@@ -63,12 +63,12 @@ use andahrm\setting\widgets\XPanel;
         <?php if(intval($models['detail']->married_status) !== \andahrm\person\models\Detail::STATUS_SINGLE) : ?>
         <?php
         $mkey = 'people-spouse';
-        XPanel::begin(['header' => 'Spouse',]);
+        XPanel::begin(['header' => '<i class="fa fa-heart"></i>' . Yii::t('andahrm/person', 'Spouse'),]);
         
         $fields = [
             'citizen_id' => $models[$mkey]->citizen_id,
             'fullname' => $models[$mkey]->fullname,
-            'birthday' => $models[$mkey]->birthday,
+            'birthday' => Yii::$app->formatter->asDate($models[$mkey]->birthday),
             'nationality_id' => $models[$mkey]->nationality->title,
             'race_id' => $models[$mkey]->race->title,
             'occupation' => $models[$mkey]->occupation,
@@ -109,7 +109,7 @@ JS;
     <div class="col-sm-12">
     <?php
     $mkey = 'photos';
-    XPanel::begin(['header' => 'Photo',]);
+    XPanel::begin(['header' => '<i class="fa fa-image"></i> ' . Yii::t('andahrm/person', 'Photo'),]);
     ?>
     <div class="row">
     <?php foreach($models[$mkey] as $key => $photo) : ?>
@@ -164,7 +164,10 @@ JS;
             $items[] = $models[$address['key']];
         }
         
-        XPanel::begin(['header' => 'Address',]);
+        XPanel::begin([
+            'header' => Yii::t('andahrm/person', 'Address'),
+            'icon' => 'map-marker',
+        ]);
         
         echo \yii\grid\GridView::widget([
             'dataProvider' => new \yii\data\ArrayDataProvider(['allModels' => $items]),
@@ -189,6 +192,7 @@ JS;
                 //'fax',
                 [
                     'attribute' => 'move_in_date',
+                    'format' => 'date',
                     'contentOptions' => ['class' => 'green'],
                 ],
                 //'move_out_date',
@@ -213,7 +217,10 @@ JS;
             $items[] = $models[$parent['key']];
         }
         
-        XPanel::begin(['header' => 'Parents',]);
+        XPanel::begin([
+            'header' => Yii::t('andahrm/person', 'Parents'),
+            'icon' => 'user-secret',
+        ]);
                     
         echo \yii\grid\GridView::widget([
             'dataProvider' => new \yii\data\ArrayDataProvider(['allModels' => $items]),
@@ -235,6 +242,7 @@ JS;
                 ],
                 [
                     'attribute' => 'birthday',
+                    'format' => 'date',
                     'contentOptions' => ['class' => 'green'],
                 ],
                 [
@@ -269,7 +277,10 @@ JS;
 <div class="row">
     <div class="col-sm-12">
         <?php
-        XPanel::begin(['header' => 'Childs',]);
+        XPanel::begin([
+            'header' => Yii::t('andahrm/person', 'Childs'),
+            'icon' => 'child',
+        ]);
         
         $mkey = 'people-childs';
                     
@@ -291,6 +302,7 @@ JS;
                 ],
                 [
                     'attribute' => 'birthday',
+                    'format' => 'date',
                     'contentOptions' => ['class' => 'green'],
                 ],
                 [
@@ -326,7 +338,10 @@ JS;
     <div class="col-sm-12">
         <?php
         $mkey = 'educations';
-        XPanel::begin(['header' => 'Educations',]);
+        XPanel::begin([
+            'header' => Yii::t('andahrm/person', 'Educations'),
+            'icon' => 'graduation-cap',
+        ]);
                     
         $educationDataProvider = new \yii\data\ActiveDataProvider([
             'query' => $models['person']->getEducations(),
@@ -346,6 +361,7 @@ JS;
                 ],
                 [
                     'attribute' => 'level.title',
+                    'header' => Yii::t('andahrm/person', 'Level'),
                     'contentOptions' => ['class' => 'green'],
                 ],
                 [
@@ -362,6 +378,7 @@ JS;
                 ],
                 [
                     'attribute' => 'country.title',
+                    'header' => Yii::t('andahrm/person', 'Country'),
                     'contentOptions' => ['class' => 'green'],
                 ],
             ],

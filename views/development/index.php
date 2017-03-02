@@ -15,7 +15,7 @@ use andahrm\development\models\DevelopmentActivityChar;
 /* @var $searchModel andahrm\development\models\DevelopmentPersonSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'การจัดการงานพัฒนาบุคลากร');
+$this->title = Yii::t('andahrm/development', 'Person Development');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
