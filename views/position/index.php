@@ -24,42 +24,6 @@ $columns = [
     'created_by' => 'created_by',
     'updated_at' => 'updated_at',
     'updated_by' => 'updated_by',
-  'edoc_id' => [
-        'attribute'=>'edoc_id',
-        'filter' => Edoc::getList(),
-        'value' => 'edoc.code',
-  //'group'=>true,
-    ],
-  'user_id'=> [
-        'attribute'=>'user_id',
-        'filter' => Person::getList(),
-        'value' => 'user.fullname'
-    ],
-  'position_id'=> [
-        'attribute'=>'position_id',
-        'filter' => Position::getList(),
-        'value' => 'position.code'
-    ],
-  'adjust_date'=>'adjust_date:date',
-  'title'=>'title',
-];
-
-$gridColumns = [
-   ['class' => '\kartik\grid\SerialColumn'],
-    //$columns['user_id'],
-  
-    $columns['adjust_date'],
-    $columns['title'],
-    $columns['position_id'],   
-    $columns['edoc_id'], 
-    //['class' => '\kartik\grid\ActionColumn',]
-];
-
-$columns = [
-    'created_at' => 'created_at:datetime',
-    'created_by' => 'created_by',
-    'updated_at' => 'updated_at',
-    'updated_by' => 'updated_by',
     'status' => [
             'attribute'=>'status',
             'filter' => PersonPositionSalary::getItemStatus(),
@@ -91,23 +55,29 @@ $columns = [
   'position_id'=> [
         'attribute'=>'position_id',
         'filter' => Position::getList(),
-        'value' => 'position.code'
+        'format'=>'html',
+        'value' => 'positionTitleCode'
     ],
   'adjust_date'=>'adjust_date:date',
-  'title'=>'title',
+  'title'=>[
+        'attribute'=>'title',
+        'format'=>'html',
+        'value' => 'titleStep'
+    ],
   'salary'=>'salary:decimal',
   'step'=>'step',
+  'level'=>'level',
 ];
 
 $gridColumns = [
    ['class' => '\kartik\grid\SerialColumn'],
-   $columns['adjust_date'],
+    $columns['adjust_date'],
     //$columns['user_id'], 
-    $columns['position_id'],   
     $columns['title'],
-    $columns['status'],
+    $columns['position_id'],   
+    $columns['level'], 
+    //$columns['status'],
     $columns['salary'],
-    $columns['step'],
     $columns['edoc_id'],   
 ];
 
