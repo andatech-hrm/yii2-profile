@@ -16,6 +16,7 @@ use andahrm\person\models\PeopleSpouse;
 use andahrm\person\models\Nationality;
 use andahrm\person\models\Race;
 use andahrm\setting\models\LocalRegion;
+use yii\web\NotFoundHttpException;
 
 /**
  * Default controller for the `profile` module
