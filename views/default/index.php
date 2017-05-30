@@ -182,6 +182,7 @@ JS;
                 //'number_registration',
                 [
                     'attribute' => 'addressText',
+                    'format' => 'html',
                     'contentOptions' => ['class' => 'green'],
                 ],
                 [

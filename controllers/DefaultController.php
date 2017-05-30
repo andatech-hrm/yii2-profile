@@ -48,6 +48,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $id = Yii::$app->user->id;
+        
         $models['person'] = $this->findModel($id);
         $models['user'] = $models['person']->user;
         $models['photos'] = $models['person']->photos;
