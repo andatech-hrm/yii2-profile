@@ -6,33 +6,14 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use andahrm\insignia\models\InsigniaPerson;
+use andahrm\insignia\models\InsigniaPersonSearch;
 
 /**
  * InsigniaPersonSearch represents the model behind the search form of `andahrm\insignia\models\InsigniaPerson`.
  */
-class SelfInsigniaPersonSearch extends InsigniaPerson
+class SelfInsigniaPersonSearch extends InsigniaPersonSearch
 {
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['insignia_request_id', 'user_id', 'last_position_id', 'last_edoc_id', 'last_insignia_request_id', 'insignia_type_id'], 'integer'],
-            [['last_step', 'last_salary'], 'number'],
-            [['last_adjust_date', 'feat', 'note','insignia_request_year'], 'safe'],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
-    }
-    
+       
 
     /**
      * Creates data provider instance with search query applied
@@ -80,15 +61,16 @@ class SelfInsigniaPersonSearch extends InsigniaPerson
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'insignia_request_id' => $this->insignia_request_id,
-            'user_id' => $this->user_id,
-            'last_step' => $this->last_step,
-            'last_adjust_date' => $this->last_adjust_date,
-            'last_salary' => $this->last_salary,
-            'last_position_id' => $this->last_position_id,
-            'last_edoc_id' => $this->last_edoc_id,
-            'last_insignia_request_id' => $this->last_insignia_request_id,
             'insignia_type_id' => $this->insignia_type_id,
+            'yearly' => $this->yearly,
+            'salary' => $this->salary,
+            'position_id' => $this->position_id,
+            'edoc_insignia_id' => $this->edoc_insignia_id,
+            'user_id' => $this->user_id,
+            'created_at' => $this->created_at,
+            'created_by' => $this->created_by,
+            'updated_at' => $this->updated_at,
+            'updated_by' => $this->updated_by,
         ]);
 
         $query->andFilterWhere(['like', 'feat', $this->feat])
