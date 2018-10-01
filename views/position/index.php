@@ -32,14 +32,14 @@ $columns = [
         ],
   'edoc_id' => [
         'attribute'=>'edoc_id',
-        'filter' => Edoc::getList(),
+        //'filter' => Edoc::getList(),
         'format' => 'html',
         'value' => 'edoc.codeTitle',
   //'group'=>true,
     ],
   'user_id'=> [
         'attribute'=>'user_id',
-        'filter' => Person::getList(),
+        //'filter' => Person::getList(),
         'format'=>'html',
         'value' => function($model){
             return $model->user->getInfoMedia(['view','edoc_id'=>$model->edoc_id]);
@@ -49,12 +49,12 @@ $columns = [
     ],
   'fullname'=> [
         'attribute'=>'user_id',
-        'filter' => Person::getList(),
+        //'filter' => Person::getList(),
         'value' => 'user.fullname'
     ],
   'position_id'=> [
         'attribute'=>'position_id',
-        'filter' => Position::getList(),
+        //'filter' => Position::getList(),
         'format'=>'html',
         'value' => 'positionTitleCode'
     ],
