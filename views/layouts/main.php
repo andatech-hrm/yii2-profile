@@ -18,10 +18,10 @@ $module = $this->context->module->id;
 <?php $this->beginContent('@app/views/layouts/main.php'); ?>
 
 <div class="x_panel">
-    <div class="x_title">
+<!--    <div class="x_title">
         <h2>User Report <small>Activity report</small></h2>
         <div class="clearfix"></div>
-    </div>
+    </div>-->
     <div class="x_content">
 
         <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
@@ -73,7 +73,7 @@ JS;
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12">
 
-            <div class="profile_title">
+<!--            <div class="profile_title">
                 <div class="col-md-6">
                     <h2>User Activity Report</h2>
                 </div>
@@ -83,7 +83,7 @@ JS;
                         <span>December 17, 2016 - January 15, 2017</span> <b class="caret"></b>
                     </div>
                 </div>
-            </div>
+            </div>-->
             
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
             <?php
