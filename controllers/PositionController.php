@@ -3,6 +3,7 @@
 namespace andahrm\profile\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 use andahrm\positionSalary\models\PersonPositionSalary;
 use andahrm\positionSalary\models\PersonPositionSalarySearch;
 use andahrm\positionSalary\models\PersonPositionSalaryOld;
