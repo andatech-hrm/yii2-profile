@@ -22,7 +22,7 @@ class PositionController extends \yii\web\Controller {
 //                    'dataProvider' => $dataProvider,
 //        ]);
 
-
+        $id = Yii::$app->user->id;
         $modelPositionOld = PersonPositionSalaryOld::find()->where(['user_id' => $id])
                 ->joinWith('edoc')
                 //->orderBy(['adjust_date'=> SORT_ASC,'edoc.date_code'=>SORT_ASC,'edoc.code'=> SORT_ASC])
