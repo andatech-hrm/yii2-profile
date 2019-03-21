@@ -125,7 +125,7 @@ $columns = [
 ];
 
 $gridColumns = [
-        ['class' => '\kartik\grid\SerialColumn'],
+    ['class' => '\kartik\grid\SerialColumn'],
     $columns['adjust_date'],
     //$columns['user_id'], 
     $columns['title'],
@@ -134,85 +134,6 @@ $gridColumns = [
     $columns['level'],
     $columns['salary'],
     $columns['edoc_id'],
-        ['class' => '\kartik\grid\ActionColumn',
-        'template' => "{update} {delete}",
-        'buttons' => [
-            'update' => function ($url, $model) use($modals, $positions, $modalOptions, $newModelEdoc) {
-
-                // $form = ActiveForm::begin();
-                // $key = $model->formName();
-                // $mkey = $positions[$key]['key'];
-                // $modals[$mkey] = Modal::begin([
-                //     'header' => '<i class="fa fa-user-secret"></i> ' . $positions[$key]['label'],
-                //     'size' => Modal::SIZE_LARGE,
-                //     'headerOptions' => $modalOptions['header-options'],
-                //     'footer' => '<div class="pull-left aero"><i>' . Yii::t('andahrm', 'Last Update') . ': ' . 
-                //         Yii::$app->formatter->asDateTime($model->updated_at) . '</i></div>' . 
-                //         $modalOptions['form-buttons'],
-                // ]);
-                // echo $model->formName();
-                // if($key == "PersonPositionSalaryOld"){
-                //     echo $this->render('_form/_update_position-old', ['model' => $model, 'form' => $form,'newModelEdoc'=>$newModelEdoc]);
-                // }else{
-                //     echo $this->render('_form/_update_position-old', ['model' => $model, 'form' => $form,'newModelEdoc'=>$newModelEdoc]);
-                // }
-                // Modal::end();
-                // ActiveForm::end();
-                $old = false;
-                $action = '';
-                //return $model->formName().'=='.PersonPositionSalaryOld::getClassName();
-                if ($model->formName() == 'PersonPositionSalaryOld') {
-                    $positionId = $model->position_old_id;
-                    $action = '/person/default/update-position-old';
-                } else {
-                    $positionId = $model->position_id;
-                    $action = '/person/default/update-position';
-                }
-
-                return Html::a('<i class="fa fa-pencil"></i>', [
-                            $action,
-                            'id' => $model->user_id,
-                            'position_id' => $positionId,
-                            'edoc_id' => $model->edoc_id,
-                                //'formAction'=>$action
-                                ], [
-                            //'class'=>'btn-update-old',
-                            'data-pjax' => 0,
-                                //'data-toggle' => 'modal',
-                                //'data-target' => '#'.$modals['update-position']->id,
-                                //'onclick' => "javascript::bindUpdatePosition({$model->user_id},{$positionId},{$model->edoc_id});",
-                                //'title' => Yii::t('yii', 'Update')
-                ]);
-            },
-            'delete' => function ($url, $model, $key) {
-                $options = [
-                    'title' => Yii::t('andahrm', 'Delete'),
-                    'aria-label' => Yii::t('andahrm', 'Delete'),
-                    'class' => 'btnDelete',
-                    'data' => [
-                        'confirm' => Yii::t('andahrm', 'Are you sure you want to delete this item?'),
-                        'method' => 'post',
-                    ],
-                    'data-pjax' => 0,
-                ];
-
-                if ($model->formName() == 'PersonPositionSalaryOld' && isset($model->position_old_id)) {
-                    $url = Url::toRoute(['delete-position-old',
-                                'user_id' => $model->user_id,
-                                'position_id' => $model->position_old_id,
-                                'edoc_id' => $model->edoc_id,
-                    ]);
-                } else {
-                    $url = Url::toRoute(['delete-position',
-                                'user_id' => $model->user_id,
-                                'position_id' => $model->position_id,
-                                'edoc_id' => $model->edoc_id
-                    ]);
-                }
-                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, $options);
-            }
-        ]
-    ]
 ];
 
 $fullExportMenu = ExportMenu::widget([
@@ -234,22 +155,22 @@ $fullExportMenu = ExportMenu::widget([
 ?>
 <div class="person-index">
 
-<?=
-GridView::widget([
-    'dataProvider' => $dataProvider,
-    //'filterModel' => $searchModel,
-    'id' => 'data-grid',
-    'pjax' => true,
+    <?=
+    GridView::widget([
+        'dataProvider' => $dataProvider,
+        //'filterModel' => $searchModel,
+        'id' => 'data-grid',
+        'pjax' => true,
 //        'resizableColumns'=>true,
 //        'resizeStorageKey'=>Yii::$app->user->id . '-' . date("m"),
 //        'floatHeader'=>true,
 //        'floatHeaderOptions'=>['scrollingTop'=>'50'],
-    'export' => [
-        'label' => Yii::t('andahrm', 'Page'),
-        'fontAwesome' => true,
-        'target' => GridView::TARGET_SELF,
-        'showConfirmAlert' => false,
-    ],
+        'export' => [
+            'label' => Yii::t('andahrm', 'Page'),
+            'fontAwesome' => true,
+            'target' => GridView::TARGET_SELF,
+            'showConfirmAlert' => false,
+        ],
 //         'exportConfig' => [
 //             GridView::HTML=>['filename' => $exportFilename],
 //             GridView::CSV=>['filename' => $exportFilename],
@@ -258,44 +179,32 @@ GridView::widget([
 //             GridView::PDF=>['filename' => $exportFilename],
 //             GridView::JSON=>['filename' => $exportFilename],
 //         ],
-    'panel' => [
-        //'heading'=>'<h3 class="panel-title"><i class="fa fa-th"></i> '.Html::encode($this->title).'</h3>',
+        'panel' => [
+            //'heading'=>'<h3 class="panel-title"><i class="fa fa-th"></i> '.Html::encode($this->title).'</h3>',
 //             'type'=>'primary',
-        'before' => ' ' .
-        Html::beginTag('div', ['class' => 'btn-group']) .
-        Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('andahrm/person', 'Create Position New'), ['create-position', 'id' => $models['person']->user_id], [
-            //'data-toggle'=>"modal",
-            //'data-target'=>"#{$modals['position']->id}",
-            'class' => 'btn btn-success btn-flat',
-            'data-pjax' => 0
-        ]) . ' ' .
-        Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('andahrm/person', 'Create Position Old'), ['create-position-old', 'id' => $models['person']->user_id], [
-            'class' => 'btn btn-warning btn-flat',
-            'data-pjax' => 0
-        ]) .
-        Html::endTag('div'),
-        'heading' => false,
-    //'footer'=>false,
-    ],
-    'toolbar' => [
-        '{export}',
-        '{toggleData}',
-        $fullExportMenu,
-    ],
-    'columns' => $gridColumns,
-]);
-?>
+            'before' => ' ',
+            'heading' => false,
+        //'footer'=>false,
+        ],
+        'toolbar' => [
+            '{export}',
+            '{toggleData}',
+            $fullExportMenu,
+        ],
+        'columns' => $gridColumns,
+    ]);
+    ?>
 </div>
-    <?php
-    $js[] = "
+<?php
+$js[] = "
 $(document).on('click', '#btn-reload-grid', function(e){
     e.preventDefault();
     $.pjax.reload({container: '#data-grid-pjax'});
 });
 ";
-    $urlCreatePosition = Url::to(['/person/default/create-position'], true);
-    $modalId = $modals['update-position']->id;
-    $js[] = <<< Js
+$urlCreatePosition = Url::to(['/person/default/create-position'], true);
+$modalId = $modals['update-position']->id;
+$js[] = <<< Js
     // $('.data-grid-container .btn-update-old').each(function(){
     //   $(this).bind('click', function() {
     //         aler($(this).attr('href'));
@@ -326,7 +235,7 @@ $(document).on('click', '#btn-reload-grid', function(e){
     
     
 Js;
-    $js[] = <<< Js
+$js[] = <<< Js
     function callbackPosition(result){
     //e.preventDefault();
     //alert(555);
@@ -337,7 +246,6 @@ Js;
         })
     }
 Js;
-    $this->registerJs(implode("\n", $js), $this::POS_END);
+$this->registerJs(implode("\n", $js), $this::POS_END);
 
 
-    
